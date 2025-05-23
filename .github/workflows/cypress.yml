@@ -6,6 +6,7 @@ on:
       - main
       - develop
       - qa
+  workflow_dispatch:  
 
 jobs:
   cypress-run:
