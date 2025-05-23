@@ -24,14 +24,12 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Create Env Variables
-        run: |
-          echo 'CYPRESS_api_key_dcs=${{ secrets.CYPRESS_API_KEY_DCS }}' >> .env
-          echo 'CYPRESS_api_key_cloud=${{ secrets.CYPRESS_API_KEY_CLOUD }}' >> .env
-          echo 'CYPRESS_endpoint_cloud_url=${{ secrets.CYPRESS_CLOUD_URL }}' >> .env
-
       - name: Run Cypress tests
         run: npx cypress run
+        env:
+          CYPRESS_api_key_dcs: ${{ secrets.CYPRESS_API_KEY_DCS }}
+          CYPRESS_api_key_cloud: ${{ secrets.CYPRESS_API_KEY_CLOUD }}
+          CYPRESS_endpoint_cloud_url: ${{ secrets.CYPRESS_CLOUD_URL }}
 
       - name: Upload Fail Screenshots
         if: failure()
